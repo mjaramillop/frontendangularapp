@@ -1,0 +1,38 @@
+export class Proveedores {
+  id: number = 0;
+  nombre: string = '';
+  direccion: string = '';
+  telefono: string = '';
+  celular1: string = '';
+  celular2: string = '';
+  email1: string = '';
+  email2: string = '';
+  nit: string = '';
+  fechadeingreso: string = '';
+  observaciones: string = '';
+  contactos: string = '';
+  actividadcomercial: number;
+  seleretienefuente: string = '';
+  seleretieneiva: string = '';
+  seleretieneica: string = '';
+  puedecobrariva: string = '';
+  espersonanaturalojuridica: string = '';
+  declararenta: string = '';
+  esgrancontribuyente: string = '';
+  tipoderegimen: number = 0;
+  tipodeagente: number = 0;
+  cuentacontable: string = '';
+  codigoderetencionaaplicar: number = 1;
+  estadodelregistro: number = 0;
+  cuentabancaria: string = '';
+  tipodecuenta: number = 0;
+  nivel1: string = '';
+  nivel2: string = '';
+  nivel3: string = '';
+  nivel4: string = '';
+  nivel5: string = '';
+  idusuario: any;
+  nombreusuario: any;
+  clavedeseguridadparapedidosporweb: string = '';
+  secargainventario:string='';
+}

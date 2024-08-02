@@ -1,0 +1,73 @@
+
+
+<table
+style="
+  width: 300px;
+  position: fixed;
+  top: 150px;
+  left: 600px;
+  right: 300px;
+"
+>
+<thead></thead>
+<tbody>
+  <tr>
+    <td colspan="2" className="errormessage">{{ errormessage }}</td>
+  
+  </tr>
+
+  <tr>
+    <td>Login:</td>
+
+    <td>
+      <input
+        type="text"
+        class="form-comntrol"
+        id="login"
+          value={{login}}
+        name="login"
+        (change)="changelogin($event)"
+     
+      
+      />
+    </td>
+  </tr>
+  <tr>
+    <td>Password:</td>
+    <td>
+      <input
+        type="password"
+        id="password"
+        value={{password}}
+        name="password"
+        (change)="changepassword($event)"
+     
+      />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button  style="width:50px;" type="button" id="buttonaccesar" (click)="Authenticate()">
+      login
+      </button>
+    </td>
+    <td>
+      <img
+
+      src="assets/iconos/cargando.gif"
+      style="top: 0px; left: 0px; width: 50px; height: 50px"
+      alt="cargando"
+      id="cargando"
+      name="cargando"
+     [ngStyle]="{width:'30px',height:'30px', visibility: iconovisible ? 'visible' : 'hidden'}"
+      />
+    </td>
+  </tr>
+</tbody>
+</table>
+
+
+
+
+
+

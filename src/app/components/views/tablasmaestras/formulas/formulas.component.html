@@ -1,0 +1,320 @@
+<div>
+    <app-menuuser></app-menuuser>
+  
+    <div  [ngStyle]="{
+      position: 'fixed',
+      top: variables.topvisiblegrilla,
+      left: variables.leftvisiblegrilla,
+      width: variables.anchoventana,
+      height: variables.altoventana,
+      'overflow-y': 'scroll'
+    }">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <button
+                id="buttonagregar"
+                name="buttonagregar"
+                type="button"
+                (click)="Agregar()"
+                *ngIf="permisos.includes('A')"
+              >
+                Agregar
+              </button>
+  
+        
+            </td>
+        
+        
+          <td>
+          
+            <input
+              type="text"
+              value="{{ filtro }}"
+              id="inputfiltro"
+              name="inputfiltro"
+              width="150px"
+              (change)="changefiltro($event)"
+            />
+            <button
+            (click)="Refresh(filtro)"
+            id="buttonbuscar"
+            name="buttonbuscar"
+            *ngIf="permisos.includes('I')"
+          >
+            Buscar desc.
+          </button>
+
+          </td>
+          </tr>
+        </tbody>
+      </table>
+   
+      <table>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>id formula</th>
+            <th>Nombre formula</th>
+            <th>id componente</th>
+            <th>Nombre componente</th>
+            <th>cantidad</th>
+            <th>unidad de medida</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let todo of arrayformulas">
+            <td>{{ todo.id }}</td>
+            <td>{{ todo.formula}}</td>
+            <td>{{ todo.nombreformula}}</td>
+            <td>{{ todo.componente}}</td>
+            <td>{{ todo.nombrecomponente}}</td>
+            <td>{{ todo.cantidad}}</td>
+            <td>{{ todo.nombreunidaddemedida}}</td>
+ 
+            <td>
+              <button
+                *ngIf="permisos.includes('M')"
+                type="button"
+                (click)="Modificar(todo.id)"
+                id="buttonmodificar"
+                name="namemodificar"
+              >
+                Modificar
+              </button>
+  
+              <button
+                *ngIf="permisos.includes('B')"
+                type="button"
+                (click)="Borrar(todo.id)"
+                id="buttonborrar"
+                name="buttonborrar"
+              >
+                Borrar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div [ngStyle]="{ visibility: mostrarventanaedicion ? 'visible':'hidden', position: 'fixed', top: variables.topvisiblegrilla, left: variables.leftvisiblegrilla }" >
+      <form>
+        <table>
+          <thead>
+           
+            <tr>
+            <tr>
+              <th>id </th>
+              <th>formula </th>
+              <th>componente </th>
+              <th>cantidad</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+
+            <tr>
+              <td colspan="4" class="errormessage">
+                {{ this.errormessage }}
+              </td>
+            </tr>
+
+
+            <tr>
+              <td>
+                <input
+                  type="text"
+                  className="text"
+                  value="{{ objeto.id }}"
+                  readOnly="true"
+                  id="inputid"
+                  name="inputid"
+                  style="width: 10px"
+                />
+              </td>
+  
+              <td>
+               
+                <input
+                  type="text"
+                  value="{{ objeto.formula }}"
+                  id="inputformula"
+                  name="inputformula"
+                  maxLength="10"
+                  (change)="changeformula($event)"
+                  style="width: 30px"
+                  [readOnly]="this.sololectura"
+                />
+  
+                <button
+                  id="buttonconsultarformula"
+                  name="buttonconsultarformula"
+                  type="button"
+                  (click)="Consultarformula()"
+                >
+                  Consultar
+                </button>
+  
+                <label
+                  style="width: 150px"
+                  id="labelnombreformula"
+                  name="nombreformula"
+                  type="text"
+                >
+                  {{ nombreformula }}
+                </label>
+  
+                <button
+                  id="buttonbuscarformula"
+                  name="buttonbuscarformula"
+                  type="button"
+                  (click)="Buscarformula()"
+                >
+                  Buscar
+                </button>
+  
+                <select
+                  id="selectformula"
+                  name="selectformula"
+                  style="width: 100px"
+                  [value]="this.objeto.formula"
+                  (change)="changeformula($event)"
+                >
+                  <option value="{0}">Seleccione..</option>
+                  <option
+                    *ngFor="let todo of arrayformulaprincipal"
+                    [value]="todo.id"
+                  >
+                    {{ todo.nombre}}
+                  </option>
+                </select>
+              </td>
+
+              <td>
+               
+                <input
+                  type="text"
+                  value="{{ objeto.componente }}"
+                  id="inputcomponente"
+                  name="inputcomponente"
+                  maxLength="10"
+                  (change)="changecomponente($event)"
+                  style="width: 30px"
+                  [readOnly]="this.sololectura"
+                />
+  
+                <button
+                  id="buttonconsultarcomponente"
+                  name="buttonconsultarcomponente"
+                  type="button"
+                  (click)="Consultarcomponente()"
+                >
+                  Consultar
+                </button>
+  
+                <label
+                  style="width: 150px"
+                  id="labelnombrecomponente"
+                  name="nombrecomponente"
+                  type="text"
+                >
+                  {{ nombrecomponente }} 
+                </label>
+  
+                <button
+                  id="buttonbuscarcomponente"
+                  name="buttonbuscarcomponente"
+                  type="button"
+                  (click)="Buscarcomponente()"
+                >
+                  Buscar
+                </button>
+  
+                <select
+                  id="selectcomponente"
+                  name="selectcomponente"
+                  style="width: 100px"
+                  [value]="this.objeto.componente"
+                  (change)="changecomponente($event)"
+                >
+                  <option value="{0}">Seleccione..</option>
+                  <option
+                    *ngFor="let todo of arraycomponentes"
+                    [value]="todo.id"
+                  >
+                    {{ todo.nombre }}
+                  </option>
+                </select>
+              </td>
+
+
+
+              <td>
+                <input
+                  type="text"
+                  className="text"
+                  value="{{ objeto.cantidad}}"
+                  [readOnly]="this.sololectura"
+                  id="inputid"
+                  name="inputcantidad"
+                  style="width: 50px"
+                  maxLength="10"
+                  (change)="changecantidad($event)"
+
+                />
+
+                
+                <label
+                  style="width: 150px"
+                  id="labelnombreunidaddemedida"
+                  name="nombreunidaddemedida"
+                  type="text"
+                >
+                  {{ nombreunidaddemedida }} 
+                </label>
+  
+              </td>
+
+
+
+
+            </tr>
+  
+            <tr>
+              <td colSpan="4">
+                <button
+                  id="procesar"
+                  name="cancelar"
+                  type="button"
+                  (click)="Procesar()"
+                >
+                  {{ operacion }}
+                </button>
+                <button
+                  id="cancelar"
+                  name="cancelar"
+                  type="button"
+                  (click)="Cancelar()"
+                >
+                  Cancelar
+                </button>
+              </td>
+
+
+
+
+
+
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  
+  
+  </div>
+
+  

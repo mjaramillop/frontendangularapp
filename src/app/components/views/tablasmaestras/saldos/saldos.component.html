@@ -1,0 +1,503 @@
+<div>
+  <app-menuuser></app-menuuser>
+
+  <div
+    [ngStyle]="{
+      position: 'fixed',
+      top: variables.topvisiblegrilla,
+      left: variables.leftvisiblegrilla,
+      width: variables.anchoventana,
+      height: variables.altoventana,
+      'overflow-y': 'scroll'
+    }"
+  >
+    <table>
+      <tbody>
+        <tr>
+          <td class="errormessage">
+            {{ this.errormessage }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Nombre del producto
+            <input
+              type="text"
+              value="{{ filtroproducto }}"
+              id="inputfiltroproducto"
+              name="inputfiltroproducto"
+              style="width: 80px"
+              (change)="changefiltroproducto($event)"
+            />
+
+            Bodega
+            <input
+              type="text"
+              value="{{ filtrobodega }}"
+              id="inputfiltrobodega"
+              name="inputfiltrobodega"
+              style="width: 80px"
+              (change)="changefiltrobodega($event)"
+            />
+            opcion seleccionada: {{ this.opcion }}
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <button type="buttondescargararchivo" (click)="DownloadCSV()">Descargar archivo en formato CSV</button>
+           
+            <img
+              src="assets/iconos/carpeta.gif"
+              [ngStyle]="{ width: '40px', height: '40px' }"
+              (click)="DownloadCSV()"
+              
+            />
+          
+            <img
+              src="assets/iconos/descargando.gif"
+              [ngStyle]="{
+                width: '30px',
+                height: '30px',
+                visibility: iconovisible ? 'visible' : 'hidden'
+              }"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button type="button" (click)="changeopcion1()">Procesar</button>
+
+            Deseo un informe de saldo fisico contra el saldo teorico mostrando
+            solo las diferencias y costearlas
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button type="button" (click)="changeopcion2()">Procesar</button>
+
+            Deseo un informe de saldos que estan por debajo del stock minimo
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <button type="button" (click)="changeopcion3()">Procesar</button>
+            Deseo un informe de saldos que estan por encima del stock maximo
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <button type="button" (click)="changeopcion4()">Procesar</button>
+            Deseo un informe de saldos que estan por debajo del stock minimo y
+            encima del stock maximo
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <button type="button" (click)="changeopcion5()">Procesar</button>
+
+            Deseo un informe de saldos actuales de inventario costeados
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <button type="button" (click)="changeopcion6()">Procesar</button>
+
+            Deseo un informe de productos que lleven mas de
+
+            <input
+              type="text"
+              value="{{ diassinrotar }}"
+              id="inputdiassinrotar"
+              name="inputdiassinbrotar"
+              style="width: 20px"
+              (change)="changediassinrotar($event)"
+            />
+            dias sin rotar
+          </td>
+        </tr>
+
+    
+      </tbody>
+    </table>
+
+    <table [width]="1350">
+      <thead>
+        <tr>
+          <th><input type="checkbox" (change)="changecolumna1($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna2($event)" /></th>
+          <th>
+            <input type="checkbox" (change)="changecolumna3($event)" />
+          </th>
+          <th><input type="checkbox" (change)="changecolumna4($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna5($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna6($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna7($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna8($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna9($event)" /></th>
+
+          <th><input type="checkbox" (change)="changecolumna10($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna11($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna12($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna13($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna14($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna15($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna16($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna17($event)" /></th>
+          <th><input type="checkbox" (change)="changecolumna18($event)" /></th>
+          <th>
+            <input type="checkbox" (change)="changecolumna19($event)" />
+          </th>
+        </tr>
+
+        <tr>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna1 === true ? 'visible' : 'hidden'
+            }"
+          ></th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna2 === true ? 'visible' : 'hidden'
+            }"
+          ></th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna3 === true ? 'visible' : 'hidden'
+            }"
+          ></th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna4 === true ? 'visible' : 'hidden'
+            }"
+          ></th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna5 === true ? 'visible' : 'hidden'
+            }"
+          ></th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna6 === true ? 'visible' : 'hidden'
+            }"
+          >
+            id
+          </th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna7 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Producto
+          </th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna8 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Id Pr
+          </th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna9 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Bodega
+          </th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna10 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Id Bod
+          </th>
+
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna11 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Saldo
+          </th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna12 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Saldo fisico
+          </th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna13 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Diferencia
+          </th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna14 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Costo promedio
+          </th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna15 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Vr diferencia
+          </th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna16 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Vr Inventario
+          </th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna17 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Ultima salida
+          </th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna18 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Dias sin rotar
+          </th>
+          <th
+            [ngStyle]="{
+              visibility: visiblecolumna19 === true ? 'visible' : 'hidden'
+            }"
+          >
+            Stock min/max
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let todo of arraysaldos">
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna1 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.nivel1 }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna2 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.nivel2 }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna3 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.nivel3 }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna4 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.nivel4 }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna5 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.nivel5 }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna6 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.id }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna7 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.nombreproducto }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna8 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.producto }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna9 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.nombrebodega }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna10 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.bodega }}
+          </td>
+
+          <td
+            [ngStyle]="{
+              background: colorGreen(
+                todo.saldo,
+                todo.stockminimo,
+                todo.stockmaximo
+              ),
+              visibility: visiblecolumna11 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.saldo }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna12 === true ? 'visible' : 'hidden',
+
+              color: 'Orange'
+            }"
+          >
+            {{ todo.saldofisico }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility:
+                visiblecolumna13 === true
+                  ? 'visible'
+                  : 'hidden'
+                  ? 'visible'
+                  : 'hidden'
+            }"
+          >
+            {{ todo.diferencia_saldofisico_saldoteorico }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility:
+                visiblecolumna14 === true
+                  ? 'visible'
+                  : 'hidden'
+                  ? 'visible'
+                  : 'hidden'
+            }"
+          >
+            {{ todo.costopromedio }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna15 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.valordiferencia }}
+          </td>
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna16 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.valorinventario }}
+          </td>
+
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna17 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.fechadelaultimasalida.substring(0, 10) }}
+          </td>
+
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna18 === true ? 'visible' : 'hidden'
+            }"
+          >
+            {{ todo.diassinrotar }}
+          </td>
+
+          <td
+            [ngStyle]="{
+              visibility: visiblecolumna19 === true ? 'visible' : 'hidden'
+            }"
+          >
+            <input
+              type="text"
+              value="{{ todo.stockminimo }}"
+              id="inputstockminimo"
+              name="inputstockminimo"
+              style="width: 30px"
+              (change)="changestockminimo($event)"
+            />
+            |
+            <input
+              type="text"
+              value="{{ todo.stockmaximo }}"
+              id="inputstockmaximo"
+              name="inputstockmaximo"
+              style="width: 30px"
+              (change)="changestockmaximo($event)"
+            />
+
+             
+            <button
+              *ngIf="permisos.includes('M')"
+              type="button"
+              (click)="Modificar(todo.id)"
+              id="buttonmodificar"
+              name="buttonmodificar"
+            >
+              Modificar
+            </button>
+          </td>
+        </tr>
+
+        <tr style="background: #f1f0f5; color: rgb(0, 49, 73)">
+          <td>Total</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            {{ this.totaldiferencia | number : "1.2-3" }}
+          </td>
+          <td></td>
+          <td>
+            {{ this.totalvalordiferencia | number : "1.2-3" }}
+          </td>
+          <td>
+            {{ this.totalvalorinventario | number : "1.2-3" }}
+          </td>
+
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

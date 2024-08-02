@@ -1,0 +1,183 @@
+<div>
+  <app-menuuser></app-menuuser>
+
+  <div
+    [ngStyle]="{
+      position: 'fixed',
+      top: variables.topvisiblegrilla,
+      left: variables.leftvisiblegrilla,
+      width: variables.anchoventana,
+      height: variables.altoventana,
+      'overflow-y': 'scroll'
+    }"
+  >
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <button
+              id="buttonagregar"
+              name="buttonagregar"
+              type="button"
+              (click)="Agregar()"
+              *ngIf="permisos.includes('A')"
+            >
+              Agregar
+            </button>
+          </td>
+
+          <td>
+            <input
+              type="text"
+              value="{{ filtro }}"
+              id="inputfiltro"
+              name="inputfiltro"
+              width="150px"
+              (change)="changefiltro($event)"
+            />
+            <button
+              (click)="Refresh(filtro)"
+              id="buttonbuscar"
+              name="buttonbuscar"
+              *ngIf="permisos.includes('I')"
+            >
+              Buscar desc.
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Nombre</th>
+          <th>Estado del registro</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let todo of arrayunidadesdemedida">
+          <td>{{ todo.id }}</td>
+
+          <td>{{ todo.nombre }}</td>
+
+          <td>{{ todo.estadodelregistro }}</td>
+
+          <td>
+            <button
+              *ngIf="permisos.includes('M')"
+              type="button"
+              (click)="Modificar(todo.id)"
+              id="buttonmodificar"
+              name="namemodificar"
+            >
+              Modificar
+            </button>
+
+            <button
+              *ngIf="permisos.includes('B')"
+              type="button"
+              (click)="Borrar(todo.id)"
+              id="buttonborrar"
+              name="buttonborrar"
+            >
+              Borrar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div
+    [ngStyle]="{
+      visibility: mostrarventanaedicion ? 'visible' : 'hidden',
+      position: 'fixed',
+      top: variables.topvisiblegrilla,
+      left: variables.leftvisiblegrilla
+    }"
+  >
+    <form>
+      <table>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>Estado del registro 1-Activo 2-Inactivo</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td colspan="3" class="errormessage">
+              {{ this.errormessage }}
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input
+                type="text"
+                className="text"
+                value="{{ objeto.id }}"
+                readOnly="true"
+                id="inputid"
+                name="inputid"
+                style="width: 30px"
+              />
+            </td>
+
+            <td>
+              <input
+                type="text"
+                value="{{ objeto.nombre }}"
+                id="inputnombre"
+                name="inputnombre"
+                maxLength="100"
+                (change)="changenombre($event)"
+                style="width: 200px"
+                [readOnly]="this.sololectura"
+              />
+            </td>
+
+            <td>
+              <input
+                type="text"
+                value="{{ objeto.estadodelregistro }}"
+                id="inputestadodelregistro"
+                name="inputestadodelregistro"
+                maxLength="10"
+                (change)="changeestadodelregistro($event)"
+                style="width: 50px"
+                [readOnly]="this.sololectura"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td colSpan="2">
+              <button
+                id="procesar"
+                name="cancelar"
+                type="button"
+                (click)="Procesar()"
+              >
+                {{ operacion }}
+              </button>
+              <button
+                id="cancelar"
+                name="cancelar"
+                type="button"
+                (click)="Cancelar()"
+              >
+                Cancelar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div>
+  <table style="border: none;">
+    <tbody>
+      <tr valign="top">
+        <td>
+          <img
+            src="{{ variables.urlimagenes }}{{
+              idusuario === undefined
+                ? 0 + '/ImaesUsers'
+                : idusuario + '/ImagesUsers'
+            }}"
+            style="top: 0px; left: 0px; width: 40px; height: 40px"
+            alt="imagen usuario"
+            id="imagenusuario"
+            name="imagenusuario"
+          />
+        </td>
+        <td>Bievenido {{ nombreusuario }}</td>
+        <td>
+          <button type="button" id="logout" name="logout" (click)="logout()">
+            Logout
+          </button>
+        </td>
+        <td>
+          Recuerde:para consultar todos los registros digite el comodin (*)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div
+    className="div"
+    [ngStyle]="{
+      'overflow-y': 'scroll',
+      'overflow-x': 'auto',
+      width: variables.menuancho,
+      height: variables.menualto,
+      position: 'fixed',
+      top: variables.menutop,
+      left: variables.menuleft
+    }"
+  >
+    <table>
+      <tbody>
+        <tr *ngFor="let todo of arraymenu.menu">
+          <td
+            [ngStyle]="{
+              backgroundColor: todo.paginaweb === '' ? 'navy' : 'transparent'
+            }"
+          >
+            <a className="a" href="{{ todo.paginaweb + '/' + todo.permisos }}">
+              {{ todo.nombre }}
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-mensajes></app-mensajes>
+</div>

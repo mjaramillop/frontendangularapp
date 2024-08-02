@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    font-family: Tahoma;
+    font-size: 12px;
+    background-image: url(App/components/fondos/fondo.jpg);
+    color: white;
+  }
+  
+  input {
+    background-color: rgb(3, 54, 72);
+    border: none;
+    color: rgb(251, 251, 251);
+  }
+
+  select {
+    background-color: rgb(165, 189, 243);
+    color: rgb(2, 34, 71);
+    border:azure;
+    border-style: inset;
+    border-color: aqua;
+    border-width: thin;
+   
+
+  }
+  
+  button {
+    background-color: rgb(9, 79, 150);
+    border:thin;
+    border-width: "1px";
+    margin-right: 5px;
+    color: aqua;
+  }
+  
+  table {
+   
+    background-image: url(App/components/fondos/fondotable.jpg);
+    border-width: 1px;
+    border-color: white;
+    text-align: left;
+    border-style: solid;
+  }
+  
+  th{
+  
+    background-color: rgb(9, 79, 150);
+    color: rgb(15, 238, 227);
+    font-family: 'Tahoma';
+    font-style: normal;
+    font-size: x-small;
+  }
+  td {
+  
+    
+    padding-left: 0px;
+    padding-right:0px;
+  }
+  
+  a {
+    color: white;
+    font-style: inherit;
+    text-decoration: none;
+  
+  }
+  
+  
+  
+  .errormessage {
+    background-color: white;
+    color: red;
+  }
+  
+  
+  
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

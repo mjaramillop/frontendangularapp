@@ -1,0 +1,188 @@
+
+<div [ngStyle]="{ 'z-index':3, visibility: mostrarventanacambiarprecios ? 'visible':'hidden', position: 'fixed', top: variables.topvisiblegrilla, left: variables.leftvisiblegrilla }" >
+ 
+
+    <table> 
+      <tbody>
+        <tr>
+          <td colspan="5" class="errormessage"  [innerText]='validaciones.mensajedeerror'>
+
+          
+          </td>
+
+        </tr>
+        <tr>
+     
+       
+          <td>Nivel  1</td>
+      
+          <td>Nivel  2</td>
+        
+          <td>Nivel  3</td>
+         
+          <td>Nivel  4</td>
+       
+          <td>Nivel  5</td>
+        </tr>
+
+        <tr>
+        
+         
+          <td>
+            <select
+            id="selectnivel1"
+            name="selectnivel1"
+            style="width: 200px"
+           
+            (change)="changenivel1($event)"
+          >
+            <option value="{0}">Seleccione..</option>
+            <option
+              *ngFor="let todo of arraycodigonombrenivel1"
+              [value]="todo"
+            >
+              {{ todo }}
+            </option>
+          </select>
+          </td>
+        
+          <td>
+            <select
+            id="selectnivel2"
+            name="selectnivel2"
+            style="width: 200px"
+           
+            (change)="changenivel2($event)"
+          >
+            <option value="{0}">Seleccione..</option>
+            <option
+              *ngFor="let todo of arraycodigonombrenivel2"
+              [value]="todo"
+            >
+              {{ todo }}
+            </option>
+          </select>
+          </td>
+         
+          <td>
+            <select
+            id="selectnivel3"
+            name="selectnivel3"
+            style="width: 200px"
+        
+            (change)="changenivel3($event)"
+          >
+            <option value="{0}">Seleccione..</option>
+            <option
+              *ngFor="let todo of arraycodigonombrenivel3"
+              [value]="todo"
+            >
+              {{ todo }}
+            </option>
+          </select>
+          </td>
+
+          <td>
+            <select
+            id="selectnivel4"
+            name="selectnivel4"
+            style="width: 200px"
+          
+            (change)="changenivel4($event)"
+          >
+            <option value="{0}">Seleccione..</option>
+            <option
+              *ngFor="let todo of arraycodigonombrenivel4"
+              [value]="todo"
+            >
+              {{ todo }}
+            </option>
+          </select>
+          </td>
+          <td>
+            <select
+            id="selectnivel5"
+            name="selectnivel5"
+            style="width: 200px"
+           
+            (change)="changenivel5($event)"
+          >
+            <option value="{0}">Seleccione..</option>
+            <option
+              *ngFor="let todo of arraycodigonombrenivel5"
+              [value]="todo"
+            >
+              {{ todo }}
+            </option>
+          </select>
+          </td>
+        
+        
+        </tr>
+
+        <tr>
+         
+         
+          <td>
+          Porcentaje de incremento %  
+          </td>
+         
+          <td>
+            <input
+            type="text"
+            value="{{ cambiarprecios.porcentajedeincremento }}"
+            id="inputporcentajedeincremento"
+            name="inputporcentajedeincremento"
+            style = "width: 80px"
+            maxlength="3"
+            (change)="changeporcentaje($event)"
+          />
+          </td>
+
+        
+          <td>
+           
+          </td>
+
+        
+          <td>
+           
+          </td>
+        
+          <td>
+           
+          </td>
+        </tr>
+        <tr>
+          <td colspan="10">
+            <button
+            (click)="Remplazar()"
+            id="buttonremplazar"
+            name="buttonremplazar"
+           
+          >
+            Incrementar el precio 
+          </button>
+             
+          <button
+          id="buttoncancelarremplazarvalores"
+          name="buttoncancelarremplazarvalores"
+          type="button"
+          (click)="Cancelar()"
+       
+        >
+          Cancelar
+        </button>
+          </td>
+
+       
+
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+
+
+

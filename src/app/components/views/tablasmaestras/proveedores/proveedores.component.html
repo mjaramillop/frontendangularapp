@@ -1,0 +1,824 @@
+<div>
+  <app-menuuser></app-menuuser>
+
+  <div
+    [ngStyle]="{
+      position: 'fixed',
+      top: variables.topvisiblegrilla,
+      left: variables.leftvisiblegrilla,
+      width: variables.anchoventana,
+      height: variables.altoventana,
+      'overflow-y': 'scroll'
+    }"
+  >
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <button
+              id="buttonagregar"
+              name="buttonagregar"
+              type="button"
+              (click)="Agregar()"
+              *ngIf="permisos.includes('A')"
+            >
+              Agregar
+            </button>
+          </td>
+
+          <td>
+            <input
+              type="text"
+              value="{{ filtro }}"
+              id="inputfiltro"
+              name="inputfiltro"
+              width="150px"
+              (change)="changefiltro($event)"
+            />
+
+            <button
+              (click)="Refresh(filtro)"
+              id="buttonbuscar"
+              name="buttonbuscar"
+              *ngIf="permisos.includes('I')"
+            >
+              Buscar desc.
+            </button>
+            <button
+            (click)="CambiarNiveles()"
+            id="buttonremplazarniveles"
+            name="buttonremplazarniveles"
+            *ngIf="permisos.includes('M')"
+          >
+            Remplazar niveles
+          </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th>nivel 1</th>
+          <th>nivel 2</th>
+          <th>nivel 3</th>
+          <th>nivel 4</th>
+          <th>nivel 5</th>
+
+          <th>id</th>
+          <th>Nombre</th>
+          <th>Estado del registro</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let todo of arrayproveedores">
+          <td style="background: #75a5ed; color: black">{{ todo.nivel1 }}</td>
+          <td style="background: hsl(229, 35%, 67%); color: black">{{ todo.nivel2 }}</td>
+          <td style="background: #8df9f2; color: black">{{ todo.nivel3 }}</td>
+          <td style="background: #f5d5d9; color: black">{{ todo.nivel4 }}</td>
+          <td style="background: #f7f5f8; color: black">{{ todo.nivel5 }}</td>
+
+          <td>{{ todo.id }}</td>
+
+          <td>{{ todo.nombre }}</td>
+
+          <td>{{ todo.estadodelregistro }}</td>
+          <td>
+          
+          </td>
+
+          <td>
+            <button
+              *ngIf="permisos.includes('M')"
+              type="button"
+              (click)="Modificar(todo.id)"
+              id="buttonmodificar"
+              name="namemodificar"
+            >
+              Modificar
+            </button>
+
+            <button
+              *ngIf="permisos.includes('B')"
+              type="button"
+              (click)="Borrar(todo.id)"
+              id="buttonborrar"
+              name="buttonborrar"
+            >
+              Borrar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div
+    [ngStyle]="{
+      visibility: mostrarventanaedicion ? 'visible' : 'hidden',
+      position: 'fixed',
+      top: this.variables.topvisiblegrilla,
+      left: this.variables.leftvisiblegrilla,
+      width: this.variables.anchoventana,
+      height: '500px',
+      'overflow-y': 'scroll'
+    }"
+  >
+    <table>
+      <tbody>
+      
+        <tr>
+          <td colspan="2" class="errormessage">
+            {{ this.errormessage }}
+          </td>
+        </tr>
+
+
+        <tr>
+          <td>Id</td>
+          <td>
+            <input
+              type="text"
+              className="text"
+              value="{{ objeto.id }}"
+              readOnly="true"
+              id="inputid"
+              name="inputid"
+              style="width: 30px"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Nombre</td>
+
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.nombre }}"
+              id="inputnombre"
+              name="inputnombre"
+              maxLength="100"
+              (change)="changenombre($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Direccion</td>
+
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.direccion }}"
+              id="inputdireccion"
+              name="inputdireccion"
+              maxLength="150"
+              (change)="changedireccion($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Telefono</td>
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.telefono }}"
+              id="inputtelefono"
+              name="inputtelefono"
+              maxLength="20"
+              (change)="changetelefono($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Celular 1</td>
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.celular1 }}"
+              id="inputcelular1"
+              name="inputcelular1"
+              maxLength="20"
+              (change)="changecelular1($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Celular 2</td>
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.celular2 }}"
+              id="inputcelular2"
+              name="inputcelular2"
+              maxLength="20"
+              (change)="changecelular2($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>E mail1</td>
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.email1 }}"
+              id="inputemail1"
+              name="inputemail1"
+              maxLength="150"
+              (change)="changeemail1($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>E mail2</td>
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.email2 }}"
+              id="inputemail2"
+              name="inputemail2"
+              maxLength="150"
+              (change)="changeemail2($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Fecha de ingreso</td>
+          <td>
+            {{ objeto.fechadeingreso }}
+          </td>
+        </tr>
+
+        <tr>
+          <td>Observaciones</td>
+          <td>
+            <textarea
+              cols="200"
+              rows="3"
+              value="{{ objeto.observaciones }}"
+              id="inputobservaciones"
+              name="inputobservaciones"
+              maxLength="300"
+              (change)="changeobservaciones($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+            >
+            </textarea>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Contactos</td>
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.contactos }}"
+              id="inputcontactos"
+              name="inputcontactos"
+              maxLength="150"
+              (change)="changecontactos($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Nivel 1 Enter: siguiente campo Consultar(*)</td>
+
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.nivel1 }}"
+              id="inputnivel1"
+              name="inputnivel1"
+              maxLength="100"
+              (change)="changenivel1($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+              (keypress)="consultarnivel1($event)"
+            />
+
+            <select
+              id="selectnivel1"
+              name="selectnivel1"
+              style="width: 100px"
+              (change)="changenivel1($event)"
+            >
+              <option value="{0}">Seleccione..</option>
+              <option
+                *ngFor="let todo of arraycodigonombrenivel1"
+                [value]="todo"
+              >
+                {{ todo }}
+              </option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Nivel 2 Enter:siguiente campo Consultar(*)</td>
+
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.nivel2 }}"
+              id="inputnivel2"
+              name="inputnivel2"
+              maxLength="100"
+              (change)="changenivel2($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+              (keypress)="consultarnivel2($event)"
+            />
+
+            <select
+              id="selectnivel2"
+              name="selectnivel2"
+              style="width: 100px"
+              (change)="changenivel2($event)"
+            >
+              <option value="{0}">Seleccione..</option>
+              <option
+                *ngFor="let todo of arraycodigonombrenivel2"
+                [value]="todo"
+              >
+                {{ todo }}
+              </option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Nivel 3 Enter:siguiente campo Consultar(*)</td>
+
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.nivel3 }}"
+              id="inputnivel3"
+              name="inputnivel3"
+              maxLength="100"
+              (change)="changenivel3($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+              (keypress)="consultarnivel3($event)"
+            />
+
+            <select
+              id="selectnivel3"
+              name="selectnivel3"
+              style="width: 100px"
+              (change)="changenivel3($event)"
+            >
+              <option value="{0}">Seleccione..</option>
+              <option
+                *ngFor="let todo of arraycodigonombrenivel3"
+                [value]="todo"
+              >
+                {{ todo }}
+              </option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Nivel 4 Enter:siguiente campo Consultar(*)</td>
+
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.nivel4 }}"
+              id="inputnivel4"
+              name="inputnivel4"
+              maxLength="100"
+              (change)="changenivel4($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+              (keypress)="consultarnivel4($event)"
+            />
+
+            <select
+              id="selectnivel4"
+              name="selectnivel4"
+              style="width: 100px"
+              (change)="changenivel4($event)"
+            >
+              <option value="{0}">Seleccione..</option>
+              <option
+                *ngFor="let todo of arraycodigonombrenivel4"
+                [value]="todo"
+              >
+                {{ todo }}
+              </option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Nivel 5 Enter:siguiente campo Consultar(*)</td>
+
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.nivel5 }}"
+              id="inputnivel5"
+              name="inputnivel5"
+              maxLength="200"
+              (change)="changenivel5($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+              (keypress)="consultarnivel5($event)"
+            />
+
+            <select
+              id="selectnivel5"
+              name="selectnivel5"
+              style="width: 100px"
+              (change)="changenivel5($event)"
+            >
+              <option value="{0}">Seleccione..</option>
+              <option
+                *ngFor="let todo of arraycodigonombrenivel5"
+                [value]="todo"
+              >
+                {{ todo }}
+              </option>
+            </select>
+          </td>
+        </tr>
+
+        
+        <tr>
+          <td>Tipo de agente</td>
+          <td>
+            <select
+              id="selecttipodeagente"
+              name="selecttipodeagente"
+              style="width: 200px"
+              [value]="this.objeto.tipodeagente"
+              (change)="changetipodeagente($event)"
+            >
+              <option value="{0}">Seleccione..</option>
+              <option *ngFor="let todo of arraytiposdeagente" [value]="todo.id">
+                {{ todo.id }}  {{ todo.nombre }}
+              </option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Estado del registro 1-Activo 2-Inactivo</td>
+
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.estadodelregistro }}"
+              id="inputestadodelregistro"
+              name="inputestadodelregistro"
+              maxLength="10"
+              (change)="changeestadodelregistro($event)"
+              style="width: 50px"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+
+        <tr>
+          <td>Se le carga inventario?</td>
+          <td>
+            <input
+              type="checkbox"
+              checked="{{ this.objeto.secargainventario ==='S' ? true : false }}"
+              id="inputsecargainventario"
+              name="inputsecargainventario"
+              (change)="changesecargainventario($event)"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+
+        <tr>
+          <td colspan="2">
+            <button
+              id="procesar"
+              name="cancelar"
+              type="button"
+              (click)="Procesar()"
+            >
+              {{ operacion }}
+            </button>
+
+            <button
+              id="cancelar"
+              name="cancelar"
+              type="button"
+              (click)="Cancelar()"
+            >
+              Cancelar
+            </button>
+          </td>
+        </tr>
+
+
+      </tbody>
+    </table>
+
+    <table
+      [ngStyle]="{
+          visibility: Esclienteoproveedor(mostrarventanaedicion) ? 'visible' : 'hidden',
+        }"
+    >
+      <tbody>
+        <tr>
+          <td>Nit</td>
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.nit }}"
+              id="inputnit"
+              name="inputnit"
+              maxLength="12"
+              (change)="changenit($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Actividad Comercial</td>
+          <td>
+            <select
+              id="selectactividadeconomica"
+              name="selectactividadeconomica"
+              style="width: 200px"
+              [value]="this.objeto.actividadcomercial"
+              (change)="changeactividadcomercial($event)"
+            >
+              <option value="{0}">Seleccione..</option>
+              <option
+                *ngFor="let todo of arrayactividadeseconomicas"
+                [value]="todo.id"
+              >
+                {{ todo.id }}   {{ todo.nombre }}
+              </option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Se le retiene en la fuente?</td>
+          <td>
+            <input
+              type="checkbox"
+              checked="{{ this.objeto.seleretienefuente === 'S' }}"
+              id="inputseleretienefuente"
+              name="inputseleretienefuente"
+              (change)="changeseleretienefuente($event)"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Se le retiene iva?</td>
+          <td>
+            <input
+              type="checkbox"
+              checked="{{ this.objeto.seleretieneiva === 'S' }}"
+              id="inputseleretieneiva"
+              name="inputseleretieneiva"
+              (change)="changeseleretieneiva($event)"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Se le retiene ica?</td>
+          <td>
+            <input
+              type="checkbox"
+              value="{{ this.objeto.seleretieneica === 'S' }}"
+              id="inputseleretieneica"
+              name="inputseleretieneica"
+              (change)="changeseleretieneica($event)"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Puede cobrar iva?</td>
+          <td>
+            <input
+              type="checkbox"
+              value="{{ this.objeto.puedecobrariva === 'S' }}"
+              id="inputpuedecobrariva"
+              name="inputpuedecobrariva"
+              (change)="changepuedecobrariva($event)"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Tipo de persona</td>
+          <td>
+            <select
+              id="selecttipodepersona"
+              name="selecttipodepersona"
+              style="width: 200px"
+              [value]="this.objeto.espersonanaturalojuridica"
+              (change)="changeespersonanaturalojuridica($event)"
+            >
+              <option value="{0}">Seleccione..</option>
+              <option
+                *ngFor="let todo of arraytiposdepersona"
+                [value]="todo.id"
+              >
+                {{ todo.id }}  {{ todo.nombre }}
+              </option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Declara renta?</td>
+          <td>
+            <input
+              type="checkbox"
+              value="{{ this.objeto.declararenta === 'S' }}"
+              id="inputdeclararenta"
+              name="inputdeclararenta"
+              (change)="changedeclararenta($event)"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Es Gran contribuyente?</td>
+          <td>
+            <input
+              type="checkbox"
+              value="{{ this.objeto.esgrancontribuyente === 'S' }}"
+              id=  "inputesgrancontribuyente"
+              name="inputesgrancontribuyente"
+              (change)="changeesgrancontribuyente($event)"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Tipo de regimen</td>
+          <td>
+            <select
+              id="selecttipoderegimen"
+              name="selecttipoderegimen"
+              style="width: 200px"
+              [value]="this.objeto.tipoderegimen"
+              (change)="changetipoderegimen($event)"
+            >
+              <option value="{0}">Seleccione..</option>
+              <option
+                *ngFor="let todo of arraytiposderegimen"
+                [value]="todo.id"
+              >
+                {{ todo.id }}  {{ todo.nombre }}
+              </option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Cuenta contable</td>
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.cuentacontable }}"
+              id="inputcuentacontable"
+              name="inputcuentacontable"
+              maxLength="20"
+              (change)="changenit($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Codigo retencion a aplicar</td>
+
+          <td>
+            <select
+              id="selectcodigoderetencionaaplicar"
+              name="selectcodigoderetencionaaaplicar"
+              style="width: 200px"
+              [value]="this.objeto.codigoderetencionaaplicar"
+              (change)="changecodiogderetencionaaplicar($event)"
+            >
+              <option value="{0}">Seleccione..</option>
+              <option *ngFor="let todo of arrayretenciones" [value]="todo.id">
+                {{ todo.id }}  {{ todo.nombre }}
+              </option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Cuenta bancaria</td>
+          <td>
+            <input
+              type="text"
+              value="{{ objeto.cuentabancaria }}"
+              id="inputcuentabancaria"
+              name="inputcuentabancaria"
+              maxLength="20"
+              (change)="changecuentabancaria($event)"
+              style="width: 200px"
+              [readOnly]="this.sololectura"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Tipo de cuenta</td>
+          <td>
+            <select
+              id="selecttipodecuenta"
+              name="selecttipodecuenta"
+              style="width: 200px"
+              [value]="this.objeto.tipodecuenta"
+              (change)="changetipodecuenta($event)"
+            >
+              <option value="{0}">Seleccione..</option>
+              <option *ngFor="let todo of arraytiposdecuentabancaria" [value]="todo.id">
+                {{ todo.id }}  {{ todo.nombre }}
+              </option>
+            </select>
+          </td>
+        </tr>
+
+        <tr    [ngStyle]="{
+          visibility:  this.objeto.tipodeagente===this.tipodeagentecliente ? 'visible' : 'hidden',
+        }" >
+          <td>Clave para pedidos web solo para clientes</td>
+          <td>
+      
+            <button
+              id="buttongeneraclave"
+              name="buttongenerarclave"
+              type="button"
+              (click)="Generarclave()"
+            >
+              Generar nueva clave y enviarle email al cliente
+            </button>
+            
+            {{ objeto.clavedeseguridadparapedidosporweb }}
+
+            <img
+              src="assets/iconos/enviandoemail.gif"
+              [ngStyle]="{width:'30px',height:'30px', visibility: iconovisible ? 'visible' : 'hidden'}"
+            />
+            {{ this.errormessage }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-proveedoresniveles
+  [mostrarventanacambiarniveles]="this.mostrarventanacambiarniveles"
+>
+</app-proveedoresniveles>
+
+
+</div>

@@ -1,0 +1,210 @@
+
+
+
+<div [ngStyle]="{ 'z-index':3, visibility: mostrarventanacambiarniveles ? 'visible':'hidden', position: 'fixed', top: variables.topvisiblegrilla, left: variables.leftvisiblegrilla }" >
+ 
+
+    <table> 
+      <tbody>
+        <tr>
+     
+       
+          <td>Descripcion Nivel  1</td>
+      
+          <td>Descripcion Nivel  2</td>
+        
+          <td>Descripcion Nivel  3</td>
+         
+          <td>Descripcion Nivel  4</td>
+       
+          <td>Descripcion Nivel  5</td>
+        </tr>
+
+        <tr>
+        
+         
+          <td>
+            <select
+            id="selectnivel1"
+            name="selectnivel1"
+            style="width: 200px"
+           
+            (change)="changefiltronivel1remplazar($event)"
+          >
+            <option value="{0}">Seleccione..</option>
+            <option
+              *ngFor="let todo of arraycodigonombrenivel1"
+              [value]="todo"
+            >
+              {{ todo }}
+            </option>
+          </select>
+          </td>
+        
+          <td>
+            <select
+            id="selectnivel2"
+            name="selectnivel2"
+            style="width: 200px"
+           
+            (change)="changefiltronivel2remplazar($event)"
+          >
+            <option value="{0}">Seleccione..</option>
+            <option
+              *ngFor="let todo of arraycodigonombrenivel2"
+              [value]="todo"
+            >
+              {{ todo }}
+            </option>
+          </select>
+          </td>
+         
+          <td>
+            <select
+            id="selectnivel3"
+            name="selectnivel3"
+            style="width: 200px"
+        
+            (change)="changefiltronivel3remplazar($event)"
+          >
+            <option value="{0}">Seleccione..</option>
+            <option
+              *ngFor="let todo of arraycodigonombrenivel3"
+              [value]="todo"
+            >
+              {{ todo }}
+            </option>
+          </select>
+          </td>
+
+          <td>
+            <select
+            id="selectnivel4"
+            name="selectnivel4"
+            style="width: 200px"
+          
+            (change)="changefiltronivel4remplazar($event)"
+          >
+            <option value="{0}">Seleccione..</option>
+            <option
+              *ngFor="let todo of arraycodigonombrenivel4"
+              [value]="todo"
+            >
+              {{ todo }}
+            </option>
+          </select>
+          </td>
+          <td>
+            <select
+            id="selectnivel5"
+            name="selectnivel5"
+            style="width: 200px"
+           
+            (change)="changefiltronivel5remplazar($event)"
+          >
+            <option value="{0}">Seleccione..</option>
+            <option
+              *ngFor="let todo of arraycodigonombrenivel5"
+              [value]="todo"
+            >
+              {{ todo }}
+            </option>
+          </select>
+          </td>
+        
+        
+        </tr>
+
+        <tr>
+         
+         
+          <td>
+          <input
+            type="text"
+            value="{{ niveles.filtronivel1remplazarpor }}"
+            id="inputfiltronivel1remplazarpor"
+            name="inputfiltronivel1remplazarpor"
+            style = "width: 200px"
+            (change)="changefiltronivel1remplazarpor($event)"
+          />
+          </td>
+         
+          <td>
+            <input
+              type="text"
+              value="{{ niveles.filtronivel2remplazarpor }}"
+              id="inputfiltronivel12remplazarpor"
+              name="inputfiltronivel2remplazarpor"
+              style = "width: 200px"
+              (change)="changefiltronivel2remplazarpor($event)"
+            />
+          </td>
+
+        
+          <td>
+            <input
+              type="text"
+              value="{{ niveles.filtronivel3remplazarpor }}"
+              id="inputfiltronivel3remplazarpor"
+              name="inputfiltronivel3remplazarpor"
+              style = "width: 200px"
+              (change)="changefiltronivel3remplazarpor($event)"
+            />
+          </td>
+
+        
+          <td>
+            <input
+              type="text"
+              value="{{ niveles.filtronivel4remplazarpor }}"
+              id="inputfiltronivel4remplazarpor"
+              name="inputfkltronivel4remplzar"
+              style = "width: 200px"
+              (change)="changefiltronivel4remplazarpor($event)"
+            />
+          </td>
+        
+          <td>
+            <input
+              type="text"
+              value="{{ niveles.filtronivel5remplazarpor }}"
+              id="inputfiltronivel5remplazarpor"
+              name="inputfiltronivel5remplazarpor"
+              style = "width: 200px"
+              (change)="changefiltronivel5remplazarpor($event)"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="10">
+            <button
+            (click)="Remplazar()"
+            id="buttonremplazar"
+            name="buttonremplazar"
+           
+          >
+            Remplazar  
+          </button>
+             
+          <button
+          id="buttoncancelarremplazarvalores"
+          name="buttoncancelarremplazarvalores"
+          type="button"
+          (click)="Cancelar()"
+       
+        >
+          Cancelar
+        </button>
+          </td>
+
+       
+
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+
+
+

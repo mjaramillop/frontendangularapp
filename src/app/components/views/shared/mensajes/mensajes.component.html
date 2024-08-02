@@ -1,0 +1,25 @@
+<div
+  className="div"
+
+  [ngStyle]="{ visibility: visible ? 'visible' : 'hidden',position:'fixed', width:'300px',top:'50px',height:'600px',left:'1150px'  }"
+>
+  <table>
+    <tbody>
+      <tr *ngFor="let todo of arraymensajesdelsistema.mensajesdelsistema">
+        <td  valign="top">
+          <img
+            src="assets/iconos/cerrar.jpg"
+            style="width: 30px; height: 30px"
+            (click)="cerrarventana()"
+          />
+
+          <img
+            src="assets/iconos/bebita.jpg"
+            style="width: 30px; height: 30px"
+          />
+        </td>
+        <td style="text-align: left">{{ todo.mensaje }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
