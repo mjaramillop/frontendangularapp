@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, Output,OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output,OnInit, input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 //services
@@ -54,7 +54,7 @@ export class ProductosCambiodepreciosComponent {
   
 
   @Input()  mostrarventanacambiarprecios :boolean=false;  
-
+  //mostrarventanacambiardeprecios=input<boolean>();
 
   // auxliar variables
 

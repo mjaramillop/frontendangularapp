@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 //services
@@ -22,6 +22,9 @@ export class ActividadeseconomicasComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
+
+   
+
 
   // text model variables
   public objeto: Actividadeseconomicas;
