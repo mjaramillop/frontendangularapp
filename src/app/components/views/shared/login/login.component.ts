@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
      
         if (response.length > 0) {
 
-          alert(response[0].idusuario);
+       
           localStorage.setItem('idusuario', response[0].idusuario);
           localStorage.setItem('nombreusuario', response[0].username);
           localStorage.setItem('token',response[0].token);

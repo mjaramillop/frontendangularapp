@@ -4,11 +4,7 @@
       <tr valign="top">
         <td>
           <img
-            src="{{ variables.urlimagenes }}{{
-              idusuario === undefined
-                ? 0 + '/ImaesUsers'
-                : idusuario + '/ImagesUsers'
-            }}"
+            src="{{ variables.urlimagenes+ idusuario + '/ImagesUsers' }}"
             style="top: 0px; left: 0px; width: 40px; height: 40px"
             alt="imagen usuario"
             id="imagenusuario"
@@ -21,9 +17,7 @@
             Logout
           </button>
         </td>
-        <td>
-          Recuerde:para consultar todos los registros digite el comodin (*)
-        </td>
+      
       </tr>
     </tbody>
   </table>
